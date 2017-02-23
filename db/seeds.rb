@@ -9,11 +9,20 @@
 require 'random_data'
 
 # Create Posts
+i = 0
 50.times do
-  Post.create!(
-    title: RandomData.random_sentence,
-    body: RandomData.random_paragraph
-  )
+  if i == 0 || i%5 == 0
+    Post.create!(
+      title: "SPAM",
+      body: RandomData.random_paragraph
+    )
+  else
+    Post.create!(
+      title: RandomData.random_sentence,
+      body: RandomData.random_paragraph
+    )
+  end
+  i = i + 1
 end
 
 # Create Comments
