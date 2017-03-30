@@ -35,7 +35,7 @@ class TopicsController < ApplicationController
 
     if @topic.save
        flash[:notice] = "Topic was updated."
-      redirect_to @topic
+       redirect_to @topic
     else
       flash.now[:alert] = "Error saving topic. Please try again."
       render :edit
@@ -62,8 +62,12 @@ class TopicsController < ApplicationController
   
   def authorize_user
     unless current_user.admin?
-      flash[:alert] = "You must be an admin to do that."
-      redirect_to topics_path
+      if current_user.moderator? && (self.action_name == 'edit' || self.action_name == 'update')
+        true
+      else
+        flash[:alert] = "You must be an admin to do that."
+        redirect_to topics_path
+      end
     end
   end
 end

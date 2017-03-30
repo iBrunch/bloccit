@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     
     if @post.save
       flash[:notice] = "Post was saved."
-      redirect_to [@topic, @post]
+      redirect_to [@topic, @post] and return
     else
       flash.now[:alert] = "There was an error saving the post. Please try again."
       render :new
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
  
     if @post.save
       flash[:notice] = "Post was updated."
-      redirect_to [@post.topic, @post]
+      redirect_to [@post.topic, @post] and return
     else
       flash.now[:alert] = "There was an error saving the post. Please try again."
       render :edit
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     if @post.destroy
       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
-      redirect_to @post.topic
+      redirect_to @post.topic and return
     else
       flash.now[:alert] = "There was an error deleting the post."
       render :show
@@ -61,9 +61,14 @@ class PostsController < ApplicationController
   
   def authorize_user
     post = Post.find(params[:id])
-    unless current_user == post.user || current_user.admin?
+    if current_user.admin? || current_user == post.user
+     true
+    elsif current_user.member?
+      flash[:alert] = "You must be an admin or moderator to do that."
+      redirect_to [post.topic, post] and return
+    elsif current_user.moderator? && self.action_name == 'destroy'
       flash[:alert] = "You must be an admin to do that."
-      redirect_to [post.topic, post]
-    end
+      redirect_to [post.topic, post] and return
+    end 
   end
 end
