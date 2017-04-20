@@ -10,6 +10,15 @@ RSpec.describe UsersController, type: :controller do
     }
   end
   
+  let(:new_failed_attributes) do
+    {
+      name: "B",
+      email: "blochead@bloc",
+      password: "bd",
+      password_confirmation: "bld"
+    }
+  end
+  
   describe "GET new" do
     it "returns http success" do
       get :new
@@ -52,6 +61,26 @@ RSpec.describe UsersController, type: :controller do
     it "sets user password_confirmation properly" do
       post :create, user: new_user_attributes
       expect(assigns(:user).password_confirmation).to eq new_user_attributes[:password_confirmation]
+    end
+        
+     it "fails to set user name properly" do
+       post :create, user: new_user_attributes
+       expect(assigns(:user).name).not_to eq new_failed_attributes[:name]
+     end
+    
+    it "fails to set user email properly" do
+      post :create, user: new_user_attributes
+      expect(assigns(:user).email).not_to eq new_failed_attributes[:email]
+    end
+    
+    it "fails to set user password properly" do
+      post :create, user: new_user_attributes
+      expect(assigns(:user).password).not_to eq new_failed_attributes[:password] 
+    end
+    
+    it "fails to set user password_confirmation properly" do
+      post :create, user: new_user_attributes
+      expect(assigns(:user).password_confirmation).not_to eq new_failed_attributes[:password_confirmation]
     end
   end
 end
