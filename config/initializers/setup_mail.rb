@@ -4,8 +4,8 @@ if Rails.env.development? || Rails.env.production?
     address:        'smtp.sendgrid.net',
     port:           '2525',
     authentication: :plain,
-    user_name:      ENV['SENDGRID_USERNAME'],
-    password:       ENV['SENDGRID_PASSWORD'],
+    user_name:      ENV['app64842291@heroku.com'],
+    password:       ENV['i4upcf5l9804'],
     domain:         'heroku.com',
     enable_starttls_auto: true
   }
