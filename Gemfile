@@ -21,6 +21,8 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda'
+  gem 'factory_girl_rails', '~> 4.0'
+  gem 'database_cleaner'
 end
 
 # Use SCSS for stylesheets

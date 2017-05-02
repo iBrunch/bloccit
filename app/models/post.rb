@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
   after_create :create_favorite
   
   default_scope { order('rank DESC') }
-  
+  scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
   scope :ordered_by_title, -> { order('title DESC') }
   scope :ordered_by_reverse_created_at, -> { order('created_at ASC') }
   validates :title, length: { minimum: 5 }, presence: true
@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
   end
   
   def create_favorite
-    Favorite.create(post:  self, user: self.user)
+    Favorite.create(post: self, user: self.user)
     FavoriteMailer.new_post(self).deliver_now
   end
   
