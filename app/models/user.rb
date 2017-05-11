@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites, source: :post 
 
   before_save { self.email = email.downcase if email.present? }
   before_save { self.role ||= :member }
@@ -15,7 +16,8 @@ class User < ActiveRecord::Base
   validates :email,
             presence: true,
             uniqueness: { case_sensitive: false },
-            length: { minimum: 3, maximum: 254 }
+            length: { minimum: 3, maximum: 254 },
+            format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
 
   has_secure_password
 
@@ -38,6 +40,6 @@ class User < ActiveRecord::Base
    
   def avatar_url(size)
     gravatar_id = Digest::MD5::hexdigest(self.email).downcase
-    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+    "//gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 end

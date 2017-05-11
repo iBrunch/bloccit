@@ -86,7 +86,7 @@ RSpec.describe Post, type: :model do
       post.save
     end
     
-    it "assosiates the vote with the owner of the post" do
+    it "associates the vote with the owner of the post" do
       expect(post.votes.first.user).to eq(post.user)
     end
   end

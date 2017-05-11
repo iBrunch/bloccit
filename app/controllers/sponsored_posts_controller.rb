@@ -13,12 +13,12 @@ class SponsoredPostsController < ApplicationController
     @sponsored_post.title = params[:sponsored_post][:title]
     @sponsored_post.body = params[:sponsored_post][:body]
     @sponsored_post.price = params[:sponsored_post][:price]
-    topic = Topic.find(params[:topic_id])
-    @sponsored_post.topic = topic
+    @topic = Topic.find(params[:topic_id])
+    @sponsored_post.topic = @topic
     
     if @sponsored_post.save
       flash[:notice] = "Sponsored post was saved successfully."
-      redirect_to [topic, @sponsored_post]
+      redirect_to [@topic, @sponsored_post]
     else
       flash[:error] = "Error saving sponsored post. Please try again."
       render :new

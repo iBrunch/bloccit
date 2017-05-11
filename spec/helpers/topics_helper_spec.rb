@@ -11,7 +11,4 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe TopicsHelper, type: :helper do
-   def is_user_authorized_for_topics?
-        current_user && current_user.admin?
-   end
 end

@@ -1,4 +1,5 @@
 class TopicsController < ApplicationController
+ include ApplicationHelper
   before_action :require_sign_in, except: [:index, :show]
   before_action :authorize_user, except: [:index, :show]
 
@@ -61,7 +62,7 @@ class TopicsController < ApplicationController
   end
   
   def authorize_user
-    if current_user.admin? || current_user.moderator? && (self.action_name == 'edit' || self.action_name == 'update')
+    if check_admin_or_mod(self.action_name)
        true
     else
       flash[:alert] = "You must be an admin to do that."

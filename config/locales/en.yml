@@ -21,3 +21,26 @@
 
 en:
   hello: "Hello world"
+en:
+  activerecord:
+    attributes:
+      sponsored_post:
+        price: "Price"
+      user:
+        email: "E-mail address"
+        password: "Password"
+    errors:
+      models:
+        sponsored_post:
+          attributes:
+            price:
+              too_short: "must have a dollar amount greater than $1."
+              blank: "can't be blank."
+        user:
+          attributes:
+            email:
+              invalid: "is invalid. Please include an '@' symbol and a valid domain like: .com, .org, .io"
+              blank: "can't be blank. Must be formatted like: example@example.com"
+            password: 
+              blank: "fields can't be blank."
+              

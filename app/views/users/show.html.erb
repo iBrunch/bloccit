@@ -12,15 +12,43 @@
         <h2 class="media-heading"><%= @user.name %></h2>
         <small>
           <%= pluralize(@user.posts.count, 'post') %>,
-          <%= pluralize(@user.comments.count, 'comment') %>
+          <%= pluralize(@user.comments.count, 'comment') %>,
+          <%= pluralize(@user.favorites.count, 'favorite') %>
         </small>
       </div>
     </div>
   </div>
 </div>
 
-<h2>Posts</h2>
-<%= render @user.posts %>
+<hr>
 
-<h2>Comments</h2>
-<%= render @user.comments %>
+<div class="well">
+  <div>
+    <h2>Your Posts</h2>
+    <% if user_has_no_posts(@user) %>
+      <p><%= @user.name %> has not submitted any posts yet.</p>
+    <% else %>
+      <%= render @user.posts %>
+    <% end %>
+  </div>
+  
+  <div>
+    <h2>Your Comments</h2>  
+    <% if user_has_no_comments(@user) %>
+      <p><%= @user.name %> has not submitted any comments yet.</p>
+    <% else %>
+      <%= render @user.comments %>
+    <% end %>
+  </div>
+  
+  <div>
+    <h2>Your Favorites</h2>
+    <% if user_has_no_favorites(@user) %>
+      <p><%= @user.name %> does not have any favorites yet.</p>
+    <% else %>
+
+      <%= render @user.favorite_posts %>
+      
+    <% end %>
+  </div>  
+</div>

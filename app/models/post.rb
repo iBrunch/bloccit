@@ -42,7 +42,7 @@ class Post < ActiveRecord::Base
   
   private
   
-  def create_vote(votes=nil)
+  def create_vote(votes = nil)
     user.votes.create( value: 1, post: self )
   end
 end

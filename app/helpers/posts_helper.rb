@@ -1,8 +1,8 @@
 module PostsHelper
-  def user_is_authorized_for_post?(post, action)
-    if  current_user && (current_user == post.user || current_user.admin?) || current_user && (current_user.moderator? && (action == 'edit'))
+  def user_is_authorized_for_posts?(post, action)
+    if current_user && (current_user == post.user || check_admin_or_mod(action))
       true
-    else
+     elsif current_user
       false
     end
   end
