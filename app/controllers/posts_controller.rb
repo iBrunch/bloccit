@@ -67,7 +67,7 @@ class PostsController < ApplicationController
     elsif current_user.member?
       flash[:alert] = "You must be an admin or moderator to do that."
       redirect_to [post.topic, post]
-    elsif check_admin_or_mod(self.action_name)
+    elsif self.action_name == 'destroy' && check_admin_or_mod(self.action_name)
       flash[:alert] = "You must be an admin to do that."
       redirect_to [post.topic, post]
     end 
