@@ -34,10 +34,8 @@
         </div>
       </div>
     <% end %>
-    
-    <% if  check_admin_or_mod("new") %>
+    <% if  is_admin_or_moderator("new") %>
       <%= link_to "New Sponsored Post", new_topic_sponsored_post_path(@topic), class: 'btn btn-success top-spacer' %>
     <% end %>
   </div>
-  
 </div>

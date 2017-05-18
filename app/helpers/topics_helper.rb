@@ -1,9 +1,7 @@
 module TopicsHelper
   def is_user_authorized_for_topics?(action)
-    if check_admin_or_mod(action)
+    if is_admin_or_moderator(action)
       true
-    elsif current_user
-      false
     end
   end
 end

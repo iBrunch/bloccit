@@ -25,30 +25,28 @@
 <div class="well">
   <div>
     <h2>Your Posts</h2>
-    <% if user_has_no_posts(@user) %>
-      <p><%= @user.name %> has not submitted any posts yet.</p>
-    <% else %>
+    <% if is_user_posts_not_zero(@user) %>
       <%= render @user.posts %>
+    <% else %>
+      <p><%= @user.name %> has not submitted any posts yet.</p>
     <% end %>
   </div>
   
   <div>
     <h2>Your Comments</h2>  
-    <% if user_has_no_comments(@user) %>
-      <p><%= @user.name %> has not submitted any comments yet.</p>
-    <% else %>
+    <% if is_user_comments_not_zero(@user) %>
       <%= render @user.comments %>
+    <% else %>
+      <p><%= @user.name %> has not submitted any comments yet.</p>
     <% end %>
   </div>
   
   <div>
     <h2>Your Favorites</h2>
-    <% if user_has_no_favorites(@user) %>
-      <p><%= @user.name %> does not have any favorites yet.</p>
-    <% else %>
-
+    <% if is_user_favorites_not_zero(@user) %>
       <%= render @user.favorite_posts %>
-      
+    <% else %>
+      <p><%= @user.name %> does not have any favorites yet.</p>
     <% end %>
   </div>  
 </div>

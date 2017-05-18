@@ -62,7 +62,7 @@ class TopicsController < ApplicationController
   end
   
   def authorize_user
-    if check_admin_or_mod(self.action_name)
+    if is_admin_or_moderator(self.action_name)
        true
     else
       flash[:alert] = "You must be an admin to do that."

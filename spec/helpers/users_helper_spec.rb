@@ -14,19 +14,19 @@ include SessionsHelper
 # end
 RSpec.describe UsersHelper, type: :helper do
   let(:my_user) { create(:user) }
-  describe "user_has_posts" do
+  describe "is_user_posts_not_zero" do
     it "should not have any posts" do
       expect( my_user.posts.count).to eq(0)
     end
   end
   
-  describe "user_has_comments" do
+  describe "is_user_comments_not_zero" do
     it "should not have any comments" do
       expect( my_user.comments.count).to eq(0)
     end
   end
   
-  describe "user_has_favorites" do
+  describe "is_user_favorites_not_zero" do
     it "should not have any favorites" do
       expect( my_user.favorites.count).to eq(0)
     end

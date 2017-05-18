@@ -34,8 +34,9 @@ en:
         sponsored_post:
           attributes:
             price:
-              too_short: "must have a dollar amount greater than $1."
+              not_a_number: "must be a number."
               blank: "can't be blank."
+              greater_than: "must be greater than 0."
         user:
           attributes:
             email:
